@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 class CreateToDo extends Component {
     state = { 
         message: '',
-        todos: []
+        todos: [],
     }
 
     handleChange = (event) => {
@@ -28,17 +28,15 @@ class CreateToDo extends Component {
         this.setState({todos: todos});
     }
 
-    handleEdit = (todo) => {
-        this.setState({showEditForm: true});
-        /*let editedToDo = prompt("Edit To-Do", todo.message);
+    handleEdit = (todo, editedMesg) => {
         let todos = [...this.state.todos];
         let updatedTodos = todos.map((t) => {
             if (t.id === todo.id) {
-                t.message = editedToDo
+                t.message = editedMesg;
             }
-            return t
+            return t;
         })
-        this.setState({todos: updatedTodos});*/
+        this.setState({todos: updatedTodos});
     }
 
     render() { 
