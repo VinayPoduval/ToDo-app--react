@@ -14,7 +14,7 @@ class CreateToDo extends Component {
 
     handleSubmit = () => {
         if(this.state.message === '') {
-            console.log('empty');
+            alert('Cant Create empty To-Do');
         }
         else {
             let todos = [...this.state.todos];
@@ -42,13 +42,15 @@ class CreateToDo extends Component {
     render() { 
         return (
             <> 
-                <input type="text" placeholder="To-Do.." 
-                    value={this.state.message}
-                    onChange={this.handleChange} 
-                />
-                <button type="submit" onClick={this.handleSubmit}>
-                    Create To-Do
-                </button>
+                <div className="create-todo-container">
+                    <input type="text" placeholder="Add a To-Do.." className="input-todo"
+                        value={this.state.message}
+                        onChange={this.handleChange} 
+                    />
+                    <button type="submit" className="button-todo" onClick={this.handleSubmit}>
+                        Create
+                    </button>
+                </div>
                 <ToDoList 
                     todos={this.state.todos}
                     onDelete={this.handleDelete}
