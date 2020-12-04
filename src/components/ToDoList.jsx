@@ -19,10 +19,13 @@ class ToDoList extends Component {
 
     editForm = (t) => {
         return(
-            <div>
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" placeholder={t.message} onChange={this.handleChange}/>
-                <button onClick={()=>this.props.onEdit(t, this.state.editedToDo)}>Confirm</button>
+            <div className="form-container">
+            <form className="form" onSubmit={this.handleSubmit}>
+                <input className="edit-input" type="text" placeholder={t.message} onChange={this.handleChange}/>
+                <div className="form-btn-container">
+                    <button className="delete-btn" onClick={()=>this.props.onEdit(t, this.state.editedToDo)}>Confirm</button>
+                    <button className="cancel-btn" onClick={()=>this.setState({toOperate: null, showEditForm:false})}>Cancel</button>
+                </div>
             </form>
             </div>
         );
@@ -30,10 +33,15 @@ class ToDoList extends Component {
 
     deleteForm = (t) => {
         return(
-            <form onSubmit={this.handleSubmit}>
-                <p>Are you Sure?</p>
-                <button onClick={()=>this.props.onDelete(t.id)}>Delete</button>
-            </form>
+            <div className="form-container">
+                <form className="form" onSubmit={this.handleSubmit}>
+                    <p>Are you Sure?</p>
+                    <div className="form-btn-container">
+                        <button className="delete-btn" onClick={()=>this.props.onDelete(t.id)}>Done</button>
+                        <button className="cancel-btn" onClick={()=>this.setState({toOperate: null, showDeleteForm:false})}>Cancel</button>
+                    </div>
+                </form>
+            </div>
         );
     }
 
@@ -41,11 +49,15 @@ class ToDoList extends Component {
         return ( 
             <>
                 {this.props.todos.map(t =>
-                <p key={t.id}>
-                    {t.message}
-                    <button onClick={()=>this.setState({showDeleteForm: true, toOperate:t})}>Delete</button>
-                    <button onClick={()=>this.setState({showEditForm: true, toOperate:t})}>Edit</button>
-                </p>
+                <div className="to-do" key={t.id}>
+                    <p>
+                        {t.message}
+                    </p>
+                    <div className="to-do-buttons">
+                        <button className="delete-btn" onClick={()=>this.setState({showDeleteForm: true, toOperate:t})}>Done</button>
+                        <button className="edit-btn" onClick={()=>this.setState({showEditForm: true, toOperate:t})}>Edit</button>
+                    </div>
+                </div>
                 )}
                 {this.state.showEditForm ? this.editForm(this.state.toOperate):null}
                 {this.state.showDeleteForm ? this.deleteForm(this.state.toOperate):null}

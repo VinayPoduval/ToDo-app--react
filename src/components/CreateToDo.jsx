@@ -17,9 +17,14 @@ class CreateToDo extends Component {
             alert('Cant Create empty To-Do');
         }
         else {
-            let todos = [...this.state.todos];
-            todos.push({id: uuid(), message: this.state.message});
-            this.setState({message:'', todos: todos});
+            if(this.state.message.length > 50) {
+                alert('To-Do message too long! Keep it concise and less than 50 letters!');
+            }
+            else {   
+                let todos = [...this.state.todos];
+                todos.push({id: uuid(), message: this.state.message});
+                this.setState({message:'', todos: todos});
+            }
         }
     }
 
@@ -51,11 +56,13 @@ class CreateToDo extends Component {
                         Create
                     </button>
                 </div>
-                <ToDoList 
-                    todos={this.state.todos}
-                    onDelete={this.handleDelete}
-                    onEdit={this.handleEdit}
-                />
+                <div className="todo-list-container">
+                    <ToDoList 
+                        todos={this.state.todos}
+                        onDelete={this.handleDelete}
+                        onEdit={this.handleEdit}
+                    />
+                </div>
             </>
         );
     }
